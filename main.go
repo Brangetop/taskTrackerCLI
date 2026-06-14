@@ -125,3 +125,27 @@ func printTasksList() {
 
 	}
 }
+
+func addTask(title, description string) {
+	tasks, err := loadTasks()
+	if err != nil {
+		fmt.Printf("Error while reading file %v\n", err)
+		return
+	}
+
+	newTask := Task{
+		Title:       title,
+		Description: description,
+		Status:      "new",
+		CreatedAt:   time.Now(),
+	}
+
+	tasks = append(tasks, newTask)
+
+	err = saveTasks(tasks)
+	if err != nil {
+		fmt.Printf("Error while saving new task %v\n", err)
+		return
+	}
+
+}
