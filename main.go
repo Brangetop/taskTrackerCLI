@@ -26,7 +26,7 @@ func main() {
 
 	addCmd := flag.NewFlagSet("add", flag.ExitOnError)
 	addTitle := addCmd.String("title", "", "Task name (required)")
-	// addDesc := addCmd.String("desc", "", "Task description")
+	addDesc := addCmd.String("desc", "", "Task description")
 
 	doneCmd := flag.NewFlagSet("done", flag.ExitOnError)
 	doneTitle := doneCmd.String("title", "", "Completed task name")
@@ -42,6 +42,8 @@ func main() {
 			addCmd.PrintDefaults()
 			os.Exit(1)
 		}
+
+		addTask(*addTitle, *addDesc)
 
 	case "list":
 		listCmd.Parse(os.Args[2:])
